@@ -10,15 +10,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       tanggal: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE, // Diubah dari DATEONLY ke DATE
         allowNull: false
       },
-      hasil: {
+      skor: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+      },
+      usia: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
+      jenis_kelamin: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
-      catatan: {
-        type: Sequelize.TEXT,
+      lama_sakit: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      alamat: {
+        type: Sequelize.STRING,
         allowNull: true
       },
       pasien_id: {

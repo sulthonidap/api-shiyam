@@ -47,6 +47,9 @@ API ini adalah RESTful API berbasis Node.js (Express) untuk manajemen data pengg
 - `POST /api/staff/:id/pasien` — Tambah pasien ke staff
 - `DELETE /api/staff/:id/pasien/:pasien_id` — Hapus pasien dari staff
 
+### Pemeriksaan berdasarkan Staff
+- `GET /api/staff/:id/pemeriksaan` — Mengambil seluruh hasil pemeriksaan dari semua pasien milik staff tertentu. Response berisi array pemeriksaan, setiap item include data pasien (id, name, email, role).
+
 ## Setup & Konfigurasi
 1. **Install dependencies**
    ```bash

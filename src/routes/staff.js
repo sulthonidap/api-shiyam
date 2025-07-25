@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, StaffPasien } = require('../models');
+const { User, StaffPasien, Pemeriksaan } = require('../models');
 
 // GET /staff/:id/pasien - Daftar pasien milik staff tertentu
 router.get('/:id/pasien', async (req, res) => {
@@ -39,6 +39,31 @@ router.delete('/:id/pasien/:pasien_id', async (req, res) => {
     res.json({ message: 'Pasien dihapus dari staff' });
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+// GET /staff/:id/pemeriksaan - Daftar pemeriksaan dari seluruh pasien milik staff tertentu
+router.get('/:id/pemeriksaan', async (req, res) => {
+  try {
+    const staff = await User.findByPk(req.params.id);
+    if (!staff || staff.role !== 'staff') return res.status(404).json({ error: 'Staff tidak ditemukan' });
+    const pasienList = await staff.getPasien();
+    const pasienIds = pasienList.map(p => p.id);
+    if (pasienIds.length === 0) return res.json([]);
+    const pemeriksaans = await Pemeriksaan.findAll({
+      where: { pasien_id: pasienIds },
+      include: [
+        {
+          model: User,
+          as: 'pasien',
+          attributes: ['id', 'name', 'email', 'role']
+        }
+      ],
+      order: [['tanggal', 'DESC']]
+    });
+    res.json(pemeriksaans);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

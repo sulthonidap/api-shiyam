@@ -15,12 +15,12 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true, // Diubah agar boleh null
         unique: true
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true // Diubah agar boleh null
       },
       role: {
         type: Sequelize.ENUM('admin', 'staff', 'pasien'),

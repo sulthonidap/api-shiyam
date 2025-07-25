@@ -7,15 +7,27 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     tanggal: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE, // Diubah dari DATEONLY ke DATE
       allowNull: false
     },
-    hasil: {
+    skor: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    usia: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    jenis_kelamin: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
-    catatan: {
-      type: DataTypes.TEXT,
+    lama_sakit: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    alamat: {
+      type: DataTypes.STRING,
       allowNull: true
     },
     pasien_id: {

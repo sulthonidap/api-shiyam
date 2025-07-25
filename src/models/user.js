@@ -10,31 +10,29 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    telephone: {
+      type: DataTypes.STRING,
+      allowNull: false // Tetap wajib diisi
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'staff', 'pasien'), // ENUM lagi
+      allowNull: false // Wajib diisi
+    },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: true // Tidak wajib
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    role: {
-      type: DataTypes.ENUM('admin', 'staff', 'pasien'),
-      allowNull: false
-    },
-    telephone: {
-      type: DataTypes.STRING,
-      allowNull: true // Kolom telephone, boleh null
+      allowNull: true // Tidak wajib
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: true // Kolom address, boleh null
+      allowNull: true // Tidak wajib
     }
   }, {
     indexes: [
-      { fields: ['role'] },
-      { unique: true, fields: ['email'] }
+      { fields: ['role'] }
     ]
   });
 
