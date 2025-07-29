@@ -28,4 +28,18 @@ router.post('/', async (req, res) => {
   }
 });
 
+// DELETE /pemeriksaan/:id - Hapus pemeriksaan berdasarkan ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const pemeriksaan = await Pemeriksaan.findByPk(req.params.id);
+    if (!pemeriksaan) {
+      return res.status(404).json({ error: 'Pemeriksaan tidak ditemukan' });
+    }
+    await pemeriksaan.destroy();
+    res.json({ message: 'Pemeriksaan berhasil dihapus' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router; 
